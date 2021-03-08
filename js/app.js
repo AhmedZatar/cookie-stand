@@ -45,17 +45,17 @@ let b=0;
 let a=0;
 let main=document.getElementById('aa');
 
-function randomCockies(min,max,element){
+function randomCoockis(min,max,element){
 
   let randomCust= Math.floor(Math.random() * (max - min + 1) + min);
-  let avgCockies = randomCust*city[a].avg;
+  let avgCoockis = randomCust*city[a].avg;
   let list=document.createElement('li');
 
   element.appendChild(list);
-  list.innerText=time[b]+': '+Math.floor(avgCockies);
-  city[a].total=city[a].total+Math.floor(avgCockies);
+  list.innerText=time[b]+': '+Math.floor(avgCoockis)+' Coockis';
+  city[a].total=city[a].total+Math.floor(avgCoockis);
 
-  return city[a].randomCockiesNumber.push(Math.floor(avgCockies));
+  return city[a].randomCockiesNumber.push(Math.floor(avgCoockis));
 }
 
 for(let i=0;i<city.length;i++){
@@ -70,11 +70,11 @@ for(let i=0;i<city.length;i++){
   for(let ii=0;ii<time.length;ii++){
     b=ii;
     // because i want function use the ii
-    randomCockies(city[i].minCust,city[i].maxCust,unOrderlist);
+    randomCoockis(city[i].minCust,city[i].maxCust,unOrderlist);
   }
   let list=document.createElement('li');
   unOrderlist.appendChild(list);
-  list.innerText='total: '+city[i].total;
+  list.innerText='total: '+city[i].total+' Coockis';
 
 
 
