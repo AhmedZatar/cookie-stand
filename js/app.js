@@ -77,5 +77,4 @@ for(let i=0;i<city.length;i++){
   list.innerText='total: '+city[i].total;
 
 
-
 }
