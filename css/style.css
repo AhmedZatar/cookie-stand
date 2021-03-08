@@ -2,3 +2,35 @@ header nav ul li img{
     width: 250px;
     height: 100px;
 }
+
+
+nav ul li{
+    display: inline-block;
+    margin-right: 100px;
+}
+
+header,footer{
+    background-color: rgb(243, 74, 74);
+     margin: 0px;
+}
+main{
+    background-color: pink;
+    margin: 0px;
+
+}
+
+th{
+    padding: 20px;
+    margin: 0px;
+    border: 1px solid rgb(243, 74, 74);
+}
+td{
+padding: 20px;
+text-align: center;
+border: 1px solid rgb(243, 74, 74);
+}
+table{
+    border-collapse: collapse;
+    border: 1px solid rgb(243, 74, 74);
+    margin: 0px;
+}
