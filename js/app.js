@@ -2,7 +2,7 @@
 let time=['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'];
 let city=[];
 city[0]={
-  arr:[],
+  randomCockiesNumber:[],
   cityName:'Seattle',
   minCust:23,
   maxCust:65,
@@ -10,7 +10,7 @@ city[0]={
   total:0,
 };
 city[1]={
-  arr:[],
+  randomCockiesNumber:[],
   cityName:'Tokyo',
   minCust:3,
   maxCust:24,
@@ -18,7 +18,7 @@ city[1]={
   total:0,
 };
 city[2]={
-  arr:[],
+  randomCockiesNumber:[],
   cityName:'Dubai',
   minCust:11,
   maxCust:38,
@@ -26,7 +26,7 @@ city[2]={
   total:0,
 };
 city[3]={
-  arr:[],
+  randomCockiesNumber:[],
   cityName:'Paris',
   minCust:20,
   maxCust:38,
@@ -34,7 +34,7 @@ city[3]={
   total:0,
 };
 city[4]={
-  arr:[],
+  randomCockiesNumber:[],
   cityName:'Lima',
   minCust:2,
   maxCust:16,
@@ -42,20 +42,20 @@ city[4]={
   total:0,
 };
 let b=0;
-let a=-1;
+let a=0;
 let main=document.getElementById('aa');
 
-function avgCockies(min,max,unOrderlist){
+function randomCockies(min,max,element){
 
-  let avgCust= Math.floor(Math.random() * (max - min + 1) + min);
-  let avgCockies = avgCust*city[a].avg;
+  let randomCust= Math.floor(Math.random() * (max - min + 1) + min);
+  let avgCockies = randomCust*city[a].avg;
   let list=document.createElement('li');
 
-  unOrderlist.appendChild(list);
+  element.appendChild(list);
   list.innerText=time[b]+': '+Math.floor(avgCockies);
   city[a].total=city[a].total+Math.floor(avgCockies);
 
-  return city[a].arr.push(Math.floor(avgCockies));
+  return city[a].randomCockiesNumber.push(Math.floor(avgCockies));
 }
 
 for(let i=0;i<city.length;i++){
@@ -64,21 +64,18 @@ for(let i=0;i<city.length;i++){
   main.appendChild(unOrderlist);
   unOrderlist.innerText=city[i].cityName;
   a=i;
+  // because i want function use the i
   console.log(city[i].cityName);
 
   for(let ii=0;ii<time.length;ii++){
     b=ii;
-
-    avgCockies(city[i].minCust,city[i].maxCust,unOrderlist);
+    // because i want function use the ii
+    randomCockies(city[i].minCust,city[i].maxCust,unOrderlist);
   }
   let list=document.createElement('li');
   unOrderlist.appendChild(list);
   list.innerText='total: '+city[i].total;
 
 
+
 }
-
-
-
-
-
