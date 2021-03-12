@@ -1,81 +1,93 @@
 'use strict';
-let time=['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'];
+let time=[' ','6:00am','7:00am','8:00am','9:00am','10:00am','11:00am','12:00pm','1:00pm','2:00pm','3:00pm','4:00pm','5:00pm','6:00pm','7:00pm','Daily Location Total'];
+let total=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 let city=[];
-city[0]={
-  randomCockiesNumber:[],
-  cityName:'Seattle',
-  minCust:23,
-  maxCust:65,
-  avg:6.3,
-  total:0,
-};
-city[1]={
-  randomCockiesNumber:[],
-  cityName:'Tokyo',
-  minCust:3,
-  maxCust:24,
-  avg:1.2,
-  total:0,
-};
-city[2]={
-  randomCockiesNumber:[],
-  cityName:'Dubai',
-  minCust:11,
-  maxCust:38,
-  avg:3.7,
-  total:0,
-};
-city[3]={
-  randomCockiesNumber:[],
-  cityName:'Paris',
-  minCust:20,
-  maxCust:38,
-  avg:2.3,
-  total:0,
-};
-city[4]={
-  randomCockiesNumber:[],
-  cityName:'Lima',
-  minCust:2,
-  maxCust:16,
-  avg:4.6,
-  total:0,
-};
-let b=0;
-let a=0;
-let main=document.getElementById('aa');
-
-function randomCoockis(min,max,element){
-
-  let randomCust= Math.floor(Math.random() * (max - min + 1) + min);
-  let avgCoockis = randomCust*city[a].avg;
-  let list=document.createElement('li');
-
-  element.appendChild(list);
-  list.innerText=time[b]+': '+Math.floor(avgCoockis)+' Coockis';
-  city[a].total=city[a].total+Math.floor(avgCoockis);
-
-  return city[a].randomCockiesNumber.push(Math.floor(avgCoockis));
+let TotalDailyLocationTotal=0;
+function City(cityName,minCust,maxCust,avg){
+  this.cityName=cityName;
+  this.minCust=minCust;
+  this.maxCust=maxCust;
+  this.avg=avg;
+  this.randomCoockies=function(){
+    let randomCust= Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
+    let avgCoockies = Math.floor(randomCust*this.avg);
+    return avgCoockies;
+  };
 }
+let c=5;
+let form=document.getElementById('newRowTable');
+form.addEventListener('submit',function(event){
+  event.preventDefault();
+  let cityName=event.target.cityName.value;
+  let minCust=parseInt(event.target.minCust.value);
+  let maxCust=parseInt(event.target.maxCust.value);
+  let avg=parseFloat(event.target.avg.value);
+  let main=document.getElementById('aa');
+  main.removeChild(main.childNodes[3]);
+  console.log(main.childNodes);
+  total=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  TotalDailyLocationTotal=0;
+  for(let i=c;i<c+1;i++){
+    city[c]= new City(cityName,minCust,maxCust,avg);
 
-for(let i=0;i<city.length;i++){
-  let unOrderlist=document.createElement('ul');
 
-  main.appendChild(unOrderlist);
-  unOrderlist.innerText=city[i].cityName;
-  a=i;
-  // because i want function use the i
-  console.log(city[i].cityName);
-
-  for(let ii=0;ii<time.length;ii++){
-    b=ii;
-    // because i want function use the ii
-    randomCoockis(city[i].minCust,city[i].maxCust,unOrderlist);
+    loopStart();
   }
-  let list=document.createElement('li');
-  unOrderlist.appendChild(list);
-  list.innerText='total: '+city[i].total+' Coockis';
-
-
-
+  c++;
 }
+);
+loopStart();
+function loopStart(){
+  city[0]= new City('Seattle',23,65,6.3);
+  city[1]= new City('Tokyo',3,24,1.2);
+  city[2]= new City('Dubai',11,38,3.7);
+  city[3]= new City('Paris',20,38,2.3);
+  city[4]= new City('Lima',2,16,4.6);
+  let main=document.getElementById('aa');
+  let table=document.createElement('table');
+  let tr=document.createElement('tr');
+  main.appendChild(table);
+  table.appendChild(tr);
+  for(let i=0;i<time.length;i++){
+    let th=document.createElement('th');
+    tr.appendChild(th);
+    th.innerText=time[i];
+  }
+
+  for(let ii=0;ii<city.length;ii++){
+    let tr2=document.createElement('tr');
+    table.appendChild(tr2);
+    let a=ii;
+    let DailyLocationTotal=0;
+    for(let i=0;i<time.length;i++){
+      let td=document.createElement('td');
+      tr2.appendChild(td);
+      if(i===0){
+        td.innerText=city[a].cityName;
+      }else if(i>0 && i<time.length-1){
+        let randomCoockies=city[a].randomCoockies();
+        td.innerText=randomCoockies;
+        DailyLocationTotal=DailyLocationTotal+randomCoockies;
+        TotalDailyLocationTotal=TotalDailyLocationTotal+randomCoockies;
+        total[i]=total[i]+randomCoockies;
+      }else{
+        td.innerText=DailyLocationTotal;
+      }
+    }
+  }
+  let tr3=document.createElement('tr');
+  table.appendChild(tr3);
+  for(let i=0;i<time.length;i++){
+    let th2=document.createElement('th');
+    tr3.appendChild(th2);
+    if(i===0){
+      th2.innerText='Total';
+    }else if(i>0 && i<time.length-1){
+
+      th2.innerText=total[i];
+    }else{
+      th2.innerText=TotalDailyLocationTotal;
+    }
+  }
+}
+
