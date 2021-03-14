@@ -115,10 +115,15 @@ main section nav h2{
 
 
 }
+main section nav ul li h2{
+    color: chocolate;
+}
 
 main section nav ul li{
+
     font-weight: bold;
-    font-size: 30px;
+    font-size: 25px;
+    color: palevioletred;
     width: 70%;
     border:5px groove palevioletred;
     border-radius: 40px;
